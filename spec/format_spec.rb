@@ -14,6 +14,7 @@ describe FixedWidthColumns do
     format_spec = [
                    { name: :id       , length:  5                 },
                    { name: :date     , length: 14                 },
+                   { name: :' '      , text:   ' '                },
                    { name: :ref      , length: 24, align: :left   },
                    { name: :debit    , length:  8, padding: '0'   },
                    { name: :credit   , length:  8, padding: '0'   },
@@ -26,10 +27,10 @@ describe FixedWidthColumns do
 
     formatter = FixedWidthColumns.new(columns: format_spec)
 
-    expect(formatter.headers).   to eq "   id          dateref                        debit  credit"
-    expect(formatter.format ft1).to eq "    1    2003-12-28payment thanks          0000000000012345"
-    expect(formatter.format ft2).to eq "    2    2004-03-12invoice 123             0006666600000000"
-    expect(formatter.format ft3).to eq "    3    2005-06-08payment thanks          0000000000044444"
-    expect(formatter.format ft4).to eq "    4    2006-06-21credit note             0000000000022222"
+    expect(formatter.headers).   to eq "   id          date ref                        debit  credit"
+    expect(formatter.format ft1).to eq "    1    2003-12-28 payment thanks          0000000000012345"
+    expect(formatter.format ft2).to eq "    2    2004-03-12 invoice 123             0006666600000000"
+    expect(formatter.format ft3).to eq "    3    2005-06-08 payment thanks          0000000000044444"
+    expect(formatter.format ft4).to eq "    4    2006-06-21 credit note             0000000000022222"
   end
 end
