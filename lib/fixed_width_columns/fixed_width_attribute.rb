@@ -31,8 +31,22 @@ class FixedWidthColumns
       end
     end
 
+    def lookup obj, str
+      segments = (str.to_s || "").split "."
+      segment = segments.shift
+      while !((segment == nil) || (segment.strip == '') ||(obj == nil))
+        begin
+          obj = obj.send segment.gsub(/-/, '_').to_sym
+        rescue Exception => e
+          raise "looking up #{str.inspect} ;\n    can't lookup #{segment}\n    on #{obj.inspect}, \n    got #{e.message.inspect}"
+        end
+        segment = segments.shift
+      end
+      obj
+    end
+
     def string_for thing
-      format(self.text || thing.send(name))
+      format(self.text || lookup(thing, name))
     end
   end
 end
