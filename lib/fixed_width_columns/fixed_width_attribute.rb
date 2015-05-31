@@ -31,12 +31,21 @@ class FixedWidthColumns
       end
     end
 
+    def get_attribute_value obj, segment
+      segment = segment.gsub(/-/, '_').to_sym
+      if obj.is_a? Hash
+        obj[segment]
+      else
+        obj.send segment
+      end
+    end
+
     def lookup obj, str
       segments = (str.to_s || "").split "."
       segment = segments.shift
       while !((segment == nil) || (segment.strip == '') ||(obj == nil))
         begin
-          obj = obj.send segment.gsub(/-/, '_').to_sym
+          obj = get_attribute_value obj, segment
         rescue Exception => e
           raise "looking up #{str.inspect} ;\n    can't lookup #{segment}\n    on #{obj.inspect}, \n    got #{e.message.inspect}"
         end
