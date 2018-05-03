@@ -35,7 +35,7 @@ describe FixedWidthColumns do
     ft3 = FinancialTransaction.new(id: 3, account: bank    , date: "to be determined", ref: "payment thanks", debit:   0.00, credit: 444.44)
     ft4 = FinancialTransaction.new(id: 4, account: customer, date: dp("2006-06-21")  , ref: "credit note"   , debit:   0.00, credit: 222.22)
 
-    formatter = FixedWidthColumns.new(columns: format_spec)
+    formatter = FixedWidthColumns::Formatter.new(columns: format_spec)
 
     expect(formatter.headers).   to eq "   id     date ref                        debit  credit            account.name"
     expect(formatter.format ft1).to eq "    1 28122003 payment thanks          0000000000012345                    Bank"
@@ -60,7 +60,7 @@ describe FixedWidthColumns do
     ft3 = FinancialTransaction.new(id: 3, account: bank    , date: "to be determined", ref: "payment thanks", debit:   0.00, credit: 444.44)
     ft4 = FinancialTransaction.new(id: 4, account: customer, date: dp("2006-06-21")  , ref: "credit note"   , debit:   0.00, credit: 222.22)
 
-    formatter = FixedWidthColumns.new(columns: format_spec)
+    formatter = FixedWidthColumns::Formatter.new(columns: format_spec)
 
     expect(formatter.headers).                             to eq "thingthing.dat thing.de            account.name"
     expect(formatter.format({ thing: ft1, account: bank})).to eq "    1 28122003 00000000                    Bank"

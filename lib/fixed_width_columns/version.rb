@@ -1,3 +1,3 @@
-class FixedWidthColumns
+module FixedWidthColumns
   VERSION = "0.0.5"
 end

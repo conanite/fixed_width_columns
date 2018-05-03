@@ -1,6 +1,6 @@
 require 'aduki'
 
-class FixedWidthColumns
+module FixedWidthColumns
   class FixedWidthAttribute
     include Aduki::Initializer
     attr_writer :align, :padding
