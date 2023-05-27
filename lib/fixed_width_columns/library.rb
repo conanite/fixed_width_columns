@@ -16,7 +16,7 @@ module FixedWidthColumns
 
     def load_export_configs_for klass
       path = File.join config_root, "#{klass}.yml"
-      return [] unless File.exists?(path)
+      return [] unless File.exist?(path)
       cfgs = YAML::load File.read path
       cfgs.map { |k,v| FixedWidthColumns::Config.new v.merge("target" => klass, "name" => k) }
     end
